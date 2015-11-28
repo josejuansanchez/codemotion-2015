@@ -51,8 +51,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     }
 
     public void sendDataToBluemix(int value) {
-        String payload = "{\"d\":{\"temp\":" + value+ "}}";
-
+        String payload = "{\"temp\":\"" + value + "\"}";
         doMQTTAction(Bluemix.uri, Bluemix.topic, Bluemix.clientId, Bluemix.username, Bluemix.password, payload);
     }
 
