@@ -1,0 +1,344 @@
+[
+  {
+    "id": "3e77d543.c1882a",
+    "type": "ibmiot in",
+    "z": "dd242955.22dbd8",
+    "authentication": "boundService",
+    "apiKey": "",
+    "inputType": "evt",
+    "deviceId": "",
+    "applicationId": "",
+    "deviceType": "+",
+    "eventType": "+",
+    "commandType": "",
+    "format": "json",
+    "name": "IBM IoT App - Codemotion",
+    "service": "registered",
+    "allDevices": true,
+    "allApplications": false,
+    "allDeviceTypes": true,
+    "allEvents": true,
+    "allCommands": false,
+    "allFormats": true,
+    "x": 231,
+    "y": 302,
+    "wires": [
+      [
+        "c0c482df.3f3b8",
+        "754bb214.8ab44c"
+      ]
+    ]
+  },
+  {
+    "id": "ae0082ac.51ff8",
+    "type": "function",
+    "z": "dd242955.22dbd8",
+    "name": "humidity",
+    "func": "return {payload:msg.payload.humidity};",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 615.5,
+    "y": 303,
+    "wires": [
+      [
+        "ff6ad0d9.00953"
+      ]
+    ]
+  },
+  {
+    "id": "ff6ad0d9.00953",
+    "type": "switch",
+    "z": "dd242955.22dbd8",
+    "name": "threshold",
+    "property": "payload",
+    "rules": [
+      {
+        "t": "lte",
+        "v": "200"
+      },
+      {
+        "t": "gt",
+        "v": "200"
+      }
+    ],
+    "checkall": "true",
+    "outputs": 2,
+    "x": 768.5,
+    "y": 333,
+    "wires": [
+      [
+        "80621eff.7f9de"
+      ],
+      [
+        "8e1706a.f71e8f8"
+      ]
+    ]
+  },
+  {
+    "id": "5dad02b7.a252fc",
+    "type": "debug",
+    "z": "dd242955.22dbd8",
+    "name": "cpu status",
+    "active": true,
+    "console": "false",
+    "complete": "payload",
+    "x": 1059.5,
+    "y": 331,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "c0c482df.3f3b8",
+    "type": "debug",
+    "z": "dd242955.22dbd8",
+    "name": "device data",
+    "active": false,
+    "console": "true",
+    "complete": "true",
+    "x": 442.5,
+    "y": 242,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "80621eff.7f9de",
+    "type": "template",
+    "z": "dd242955.22dbd8",
+    "name": "danger",
+    "field": "",
+    "template": "Humidity ({{payload}}) is low. Your plant needs water",
+    "x": 911.5,
+    "y": 286,
+    "wires": [
+      [
+        "5dad02b7.a252fc"
+      ]
+    ]
+  },
+  {
+    "id": "8e1706a.f71e8f8",
+    "type": "template",
+    "z": "dd242955.22dbd8",
+    "name": "safe",
+    "field": "",
+    "template": "Humidity ({{payload}}) is ok. Your plant is happy :D",
+    "x": 910.5,
+    "y": 379,
+    "wires": [
+      [
+        "5dad02b7.a252fc"
+      ]
+    ]
+  },
+  {
+    "id": "754bb214.8ab44c",
+    "type": "switch",
+    "z": "dd242955.22dbd8",
+    "name": "type of message",
+    "property": "payload.humidity",
+    "rules": [
+      {
+        "t": "nnull"
+      },
+      {
+        "t": "else"
+      }
+    ],
+    "checkall": "true",
+    "outputs": 2,
+    "x": 449,
+    "y": 358,
+    "wires": [
+      [
+        "ae0082ac.51ff8"
+      ],
+      [
+        "9f7713b2.6088f"
+      ]
+    ]
+  },
+  {
+    "id": "19ce7964.e63187",
+    "type": "switch",
+    "z": "dd242955.22dbd8",
+    "name": "type of key",
+    "property": "payload",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "\"up\""
+      },
+      {
+        "t": "eq",
+        "v": "\"down\""
+      },
+      {
+        "t": "eq",
+        "v": "\"left\""
+      },
+      {
+        "t": "eq",
+        "v": "\"right\""
+      },
+      {
+        "t": "eq",
+        "v": "\"space\""
+      },
+      {
+        "t": "else"
+      }
+    ],
+    "checkall": "true",
+    "outputs": 6,
+    "x": 728,
+    "y": 579,
+    "wires": [
+      [
+        "8ac96e78.75369"
+      ],
+      [
+        "35507253.caaf8e"
+      ],
+      [
+        "f43f9f27.0bc06"
+      ],
+      [
+        "3bbc777c.c44388"
+      ],
+      [
+        "55fa1ba3.aa05e4"
+      ],
+      [
+        "4dc13ba9.b23ec4"
+      ]
+    ]
+  },
+  {
+    "id": "8ac96e78.75369",
+    "type": "template",
+    "z": "dd242955.22dbd8",
+    "name": "up",
+    "field": "payload",
+    "format": "handlebars",
+    "template": "This is the payload: {{payload}} !",
+    "x": 914,
+    "y": 464,
+    "wires": [
+      [
+        "5ddb4942.a224b8"
+      ]
+    ]
+  },
+  {
+    "id": "9f7713b2.6088f",
+    "type": "function",
+    "z": "dd242955.22dbd8",
+    "name": "key",
+    "func": "return {payload:msg.payload.key};",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 586,
+    "y": 576,
+    "wires": [
+      [
+        "19ce7964.e63187"
+      ]
+    ]
+  },
+  {
+    "id": "35507253.caaf8e",
+    "type": "template",
+    "z": "dd242955.22dbd8",
+    "name": "down",
+    "field": "payload",
+    "format": "handlebars",
+    "template": "This is the payload: {{payload}} !",
+    "x": 913,
+    "y": 509,
+    "wires": [
+      [
+        "5ddb4942.a224b8"
+      ]
+    ]
+  },
+  {
+    "id": "f43f9f27.0bc06",
+    "type": "template",
+    "z": "dd242955.22dbd8",
+    "name": "left",
+    "field": "payload",
+    "format": "handlebars",
+    "template": "This is the payload: {{payload}} !",
+    "x": 915,
+    "y": 557,
+    "wires": [
+      [
+        "5ddb4942.a224b8"
+      ]
+    ]
+  },
+  {
+    "id": "3bbc777c.c44388",
+    "type": "template",
+    "z": "dd242955.22dbd8",
+    "name": "right",
+    "field": "payload",
+    "format": "handlebars",
+    "template": "This is the payload: {{payload}} !",
+    "x": 918,
+    "y": 609,
+    "wires": [
+      [
+        "5ddb4942.a224b8"
+      ]
+    ]
+  },
+  {
+    "id": "55fa1ba3.aa05e4",
+    "type": "template",
+    "z": "dd242955.22dbd8",
+    "name": "space",
+    "field": "payload",
+    "format": "handlebars",
+    "template": "Remember to buy bananas! :)",
+    "x": 917,
+    "y": 668,
+    "wires": [
+      [
+        "5ddb4942.a224b8"
+      ]
+    ]
+  },
+  {
+    "id": "5ddb4942.a224b8",
+    "type": "debug",
+    "z": "dd242955.22dbd8",
+    "name": "status",
+    "active": true,
+    "console": "true",
+    "complete": "payload",
+    "x": 1099,
+    "y": 587,
+    "wires": [
+      
+    ]
+  },
+  {
+    "id": "4dc13ba9.b23ec4",
+    "type": "template",
+    "z": "dd242955.22dbd8",
+    "name": "other",
+    "field": "payload",
+    "format": "handlebars",
+    "template": "This is the payload: {{payload}} !",
+    "x": 916,
+    "y": 722,
+    "wires": [
+      [
+        "5ddb4942.a224b8"
+      ]
+    ]
+  }
+]
