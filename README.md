@@ -1,6 +1,6 @@
 # Codemotion Spain 2015
 
-Ejemplos, slides y recursos usados en la charla **[«Gente que hace cosas con cacharros»][1]**.  
+Ejemplos, [slides][11] y recursos usados en la charla **[«Gente que hace cosas con cacharros»][1]**.  
 [Codemotion Spain 2015][2]. Madrid, 28 de Noviembre de 2015.
 
 **«Gente que hace cosas con cacharros»** es una charla de: 
@@ -17,7 +17,8 @@ Si alguna vez hablando con tu madre has usado en una frase al menos 6 de estas p
 
 ## Slides
 
-[![](resources/cover.png?raw=true)][11]
+[![](resources/cover.png?raw=true)][11]  
+También puedes encontrar las slides en [Speaker Deck][11].
 
 ## Vídeos usados en la charla: 
 * [Makey Makey + Protocoder][5]
